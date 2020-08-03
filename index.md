@@ -29,4 +29,3 @@
 ## Shiny Server for College of Engineering
 # [Vim](Vim)
 # [RegExp](RegExp)
-# [CV](CV)
