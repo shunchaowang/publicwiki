@@ -42,3 +42,9 @@ sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 * Disable default tomcat 7
 * Enable tomcat 8.5
 
+## Tomcat Service Stopping State on Windows
+Sometime Tomcat service fails to stop from Service on Windows Server, we need to use CMD to force kill the task.
+* Open 'Task Manager', switch to 'Services' tab, find the 'Name' for Tomcat service, I have Tomcat8;
+* Open a CMD with Administrator permission, run command `sc queryex Tomcat8`, and locate `PID` of the output;
+* run command `taskkill /pid [PID] /f` to force stop the service.
+

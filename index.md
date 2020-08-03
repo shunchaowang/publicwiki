@@ -1,8 +1,8 @@
 # Fundamental
 ## OS - [WSL](WSL), Mac, RHEL 7
-## [Shell](Shell) - Bash, [Zsh](Zsh), Shell Script, SSH, [PKI](PKI)
+## [Shell](Shell) - [Bash](Bash), [Zsh](Zsh), [PowerShell](PowerShell), Shell Script, SSH, [PKI](PKI)
 ## Network - firewall, nat, [Tomcat](Tomcat), [Apache](Apache)
-## [Database](Database) - [Mysql](Mysql), H2, Oracle, Postgresql
+## [Database](Database) - [Mysql](Mysql), H2, [Oracle](Oracle), Postgresql, SQL Server
 ## Front End - HTML, CSS, ,[JavaScript](JavaScript), Material-UI
 ## Spring Framework - [[Spring Data]], Spring Boot
 ## [Nodejs](Nodejs) - Node, RPM and [React](React)
@@ -27,5 +27,6 @@
 ## HCL
 ## VOCA
 ## Shiny Server for College of Engineering
-# [Fun](Fun)
+# [Vim](Vim)
+# [RegExp](RegExp)
 # [CV](CV)
