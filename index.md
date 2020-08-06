@@ -9,7 +9,7 @@
 ## [Grails](Grails)
 ## [Gradle](Gradle)
 ## [Java](Java) & Groovy
-## [Asp Net](Asp.Net)
+## [Asp.Net](Asp Net)
 ## [Algorithm](Algorithm)
 # [R](R) - Installation, Configuration, Shiny Server, RStudio
 # [Tools](Tools) - [Docker](Docker), unit test, integration test, load test
@@ -24,7 +24,6 @@
 ## [Application Support](Application Support)
 ## [[AirHilliard for Ayaz]]
 ## [[BMI OAuth2]] - BMI Centralized Authentication Infrastructure including Auth and ID Management Portal
-## HCL
 ## VOCA
 ## Shiny Server for College of Engineering
 # [Vim](Vim)
