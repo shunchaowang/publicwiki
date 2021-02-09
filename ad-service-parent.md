@@ -29,4 +29,4 @@ start zookeeper: `bin/zookeeper-server-start.sh config/zookeeper.properties`
 start kafka: `bin/kafka-server-start.sh config/server.properties`
 ## Services
 ## Code
-run ad-service with maven from `ad-service-parent`: `mvn spring-boot:run -pl ad-service`
+run ad-service with maven from `ztotech-ad-service`: `mvn spring-boot:run -pl ad-service`
