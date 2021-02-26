@@ -18,6 +18,10 @@ password: admin
 db: admin
 username: admin
 password: admin
+* MongoDb in Virtual Box
+username: mongoAdmin
+password: changeMe
+login: `mongo -u mongoAdmin -p --authenticationDatabase admin`
 fileserver:
 mongodb: fileDB
 username: fileservice
