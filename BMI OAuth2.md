@@ -1,3 +1,18 @@
+# Environments
+## bmi-oauth2
+* build: run `./gradlew build` to build the whole project
+* config mysql data source: in application-[env].properties of auth and service, put
+  bmi.oauth2.persistence.[driver|url|username|password] properties to set up the mysql connection.
+* load oauth2 schema into the database
+* load test data into oauth2 table
+### bmi-oauth2:auth
+run `./gradlew :auth:bootRun` auth should be accessible on the host:port based on application-[env].properties of auth
+project.
+### bmi-oauth2:service
+run `./gradlew :auth:bootRun` auth should be accessible on the host:port based on application-[env].properties of auth
+project.
+## bmi-oauth2-app
+run `npm start` to start in dev mode, the default test user is admin/admin
 # Tasks
 - [X] Upgrade Material UI from V3 to V4
     - [X] Update NavBar
