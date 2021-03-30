@@ -20,3 +20,5 @@ MySQL, Redis, Nginx and JDK.
 * Install apps
 * Configure apps
 ## Enviroment
+## Huawei Clound
+
