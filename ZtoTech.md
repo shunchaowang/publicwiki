@@ -20,5 +20,26 @@ MySQL, Redis, Nginx and JDK.
 * Install apps
 * Configure apps
 ## Enviroment
+### Production
+Ubuntu Server 20.04 will be used as the server. All prerequisites have to be installed before the deployment of web
+apps.
+* Prerequisites
+1. Install OpenJDK 11
+2. Install MySQL
+3. Install Mongodb
+4. Install Redis
+5. Install Nginx
+6. Install Kafka
+* Configuration
+1. Set up MySQL
+2. Set up Mongodb
+3. Set up Redis
+4. Set up Nginx
+5. Set up Kafka
+* Deployment
+1. Create environment properties file `src/main/resources/application-prod.properties`
+2. Update `src/main/resources/PaasConfigurationFile.properties` based on the previous configuration
+3. Build project
+4. Deploy the artifacts
 ## Huawei Clound
 
