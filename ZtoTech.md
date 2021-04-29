@@ -56,14 +56,26 @@ After all these steps root cannot log in yet.
 3. Build project
 4. Deploy the artifacts
 ### Development
+* JDK
+Both JDK 11 and JDK 8 work for ad-service.
+* MySQL
+Install MySQL 8.*, remember the username and password, it will be needed by ad-service. Start MySQL service.
+* Mongo
+Install Mongodb, the username and password will be needed by ad-service. Start Mongo service.
+* Redis
+Install Redis, the username and password will be needed by ad-service. Start Redis service.
+* Kafka
+Follow Apache website Kafka to download the Kafka for the local environment, it can be Windows, Mac and Linux, just run
+it and keep everything as default. 
 * ad-service
 1. code repo: `https://github.com/shunchaowang/ztotech-ad-service.git`
 2. build
-under project root, run `./mvnw clean package`, make it's successful
+under project root, run `./mvnw clean package`, make sure it's successful
 3. run
 create an adservice database in mysql, source the sql file in the code to initialize tables and data, update
-`ad-service/src/main/resources/application-local.properties` to the username and password used by local mysql, then
-update `spring.profiles.active=local` in `ad-service/src/main/resources/application.properties`, then build again. If
+`ad-service/src/main/resources/application-local.properties` to the username and password used by local mysql, 
+update `spring.profiles.active=local` in `ad-service/src/main/resources/application.properties`, and update
+`ad-service/src/main/resources/PaasConfigurationFile.properties` with username and password for Mongodb, then build again. If
 the build passes, under root path run `./mvnw spring-boot:run -pl ad-service`
 * admin-web
 1. code repo: `https://github.com/shunchaowang/ztotech_ad_admin_web`
@@ -82,5 +94,13 @@ the build passes, under root path run `./mvnw spring-boot:run -pl ad-service`
 * build `npm install`
 3. run
 * run `npm run serve`
+* ios-manager
+1. code repo: `https://github.com/shunchaowang/ztotech_ad_ios-manager.git`
+2. update Mac and Xcode to the latest version
+3. install homebrew (it will be used to install cocoapods, I prefer homebrew. You can also use other ways. As long as
+   the cocoapods can be installed. The app only needs cocoapods.)
+4. install cocoapods `brew install cocoapods`
+5. under project root, run `pop install` to install all dependencies
+6. Open project in Xcode, build and run.
 ## Huawei Clound
 
