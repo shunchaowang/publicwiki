@@ -1,3 +1,17 @@
+# Architecture
+Spring OAuth2 is a multiple module project, it contains 
+- `core` is a springboot library containing all models, or mappings, repositories and services. Shared components are also in
+  `core` module. it's depended by both service, auth and admin.
+- `service` is a springboot restful service app to provide all apis for login and token exchange from frontend react app. It also
+  provides apis to frontend react app to manage user and apps register to the platform. Essentially the apis can be
+  consumed by any aps.  
+- `auth` is a springboot web app providing oauth2 service utilizing spring security oauth2 library. 
+- `admin` is a to be developed web app providing the same functionality with frontend react app.
+- `oauth2-app` a react frontend app to manage registered apps and users.
+---
+# Design
+
+---
 # Environments
 ## bmi-oauth2
 * build: run `./gradlew build` to build the whole project
