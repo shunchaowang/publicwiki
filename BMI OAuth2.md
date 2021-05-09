@@ -10,7 +10,7 @@ Spring OAuth2 is a multiple module project, it contains
 - `oauth2-app` a react frontend app to manage registered apps and users.
 ---
 # Design
-
+Service side is a springboot multi module projects built by gradle. 
 ---
 # Environments
 ## bmi-oauth2
