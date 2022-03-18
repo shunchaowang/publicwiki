@@ -31,4 +31,42 @@ fi
 * `--no-pager` must be placed as the first argument
 * `--since='2020-06-11'` shows all logs since the date
 * `--before='10-31-2020'` shows all logs before the date
+### set up proxy for git
+Git proxy can be set/unset globally
+- to set up global proxy
+* run command 
+  ```
+  git config --global http.proxy <http_proxy>
+  git config --global https.proxy <https_proxy>
+  ```
+- to unset global proxy
+  ```
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy 
+  ```
+- to set up local proxy
+- to unset local proxy
+### Remove files from commit history
+`git-filter-repo` is a command line tool to remove the sensitive or large files from commit history both locally and on
+remote.
+1. install `git-filter-repo` using homebrew `brew install git-filter-repo`
+2. clone the repo running `git clone --mirrow <repo_url>`
+3. remove the files, `cd` to the cloned repo, run below command to remove the file, run multi times if there are multi
+   files
+   ```
+   git filter-repo --invert-paths --path <path-to-the-file>
+  Parsed 197 commits
+  New history written in 0.11 seconds; now repacking/cleaning...
+  Repacking your repo and cleaning out old unneeded objects
+  Enumerating objects: 210, done.
+  Counting objects: 100% (210/210), done.
+  Delta compression using up to 12 threads
+  Compressing objects: 100% (127/127), done.
+  Writing objects: 100% (210/210), done.
+  Building bitmaps: 100% (48/48), done.
+  Total 210 (delta 98), reused 144 (delta 75), pack-reused 0
+  Completely finished after 0.64 seconds. 
+  ```
+4. add the files to git ignore to not track running `echo "path-to-the-file" >> .gitignore`
+5. push to the remote by running `git push origin --force --all`
 
