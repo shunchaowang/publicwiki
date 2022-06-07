@@ -2,9 +2,9 @@
 ## OS - [WSL](WSL), Mac, RHEL 7
 ## [Shell](Shell) - [Bash](Bash), [Zsh](Zsh), [PowerShell](PowerShell), Shell Script, SSH, [PKI](PKI)
 ## Network - firewall, nat, [Tomcat](Tomcat), [Apache](Apache)
-## [Database](Database) - [Mysql](Mysql), H2, [Oracle](Oracle), Postgresql, SQL Server
+## [Database](Database) - [Mysql](Mysql), H2, [Oracle](Oracle), [Postgresql](Postgresql), SQL Server
 ## Front End - HTML, CSS, ,[JavaScript](JavaScript), Material-UI
-## Spring Framework - [[Spring Data]], Spring Boot
+## [Spring Framework](Spring Framework) - [[Spring Data]], Spring Boot
 ## [Nodejs](Nodejs) - Node, npm and [React](React)
 ## [Grails](Grails)
 ## [Gradle](Gradle)
