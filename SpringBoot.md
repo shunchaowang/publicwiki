@@ -58,5 +58,145 @@ DeserializationContext ctxt) method.
 - To retrieve the root node, call `JsonNode jsonNode = p.getCodec().readTree(p)`
 - To retrieve the node as an array, call `ArrayNode arrayNode = (ArrayNode)jsonNode.get("<nodeName>")`, then iterate the
   arrayNode
-  
+## Web Client for Rest Service Call
+**WebClient** is an interface representing the main entry point for performing web requests.
+It was created as part of the Spring Web Reactive module and will be replacing the classic RestTemplate in these scenarios. 
+In addition, the new client is a reactive, non-blocking solution that works over the HTTP/1.1 protocol.
+It's important to note that even though it is, in fact, a non-blocking client and it belongs to the spring-webflux library,
+the solution offers support for both synchronous and asynchronous operations, making it suitable also for applications running on a Servlet Stack.
+his can be achieved by blocking the operation to obtain the result. Of course, this practice is not suggested if we're working on a Reactive Stack.
+Finally, the interface has a single implementation, the DefaultWebClient class.
+1. create an instance
+Here I want to create a custom **WebClient** with longer connection/read/write timeout instead default 30 seconds, to
+accomplish this, I will create a `reactor.netty.http.client.HttpClient` to pass in for the **WebClient** creation.
+- create a `HttpClient` with timeout of 15 minutes (it's not a good idea to make this long, but if there are some
+  database connection takes longer, this is the only option)
+```
+HttpClient httpClient =
+        HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000 * 60 * 15)
+            .responseTimeout(Duration.ofMinutes(15))
+            .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(15, TimeUnit.MINUTES))
+                .addHandlerLast(new WriteTimeoutHandler(15, TimeUnit.MINUTES)));
+```
+- create a `ExchangeStratety` with max buffer size (the best solution to use stream if the external call supports)
+```
+ // increase the buffer size to be 16M
+    int size = 16 * 1024 * 1024;
+    ExchangeStrategies strategies = ExchangeStrategies.builder()
+        .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(size))
+        .build();
+```
+- build the `WebClient` using the `HttpClient` created above
+`WebClient webClient WebClient.builder().clientConnector(new ReactorClientHttpConnector(httpClient)).exchangeStrategies(strategies).build();`
+2. make a request
+- prepare the request - define the method
+Here a post request is created
+`UriSpec<RequestBodySpec> uriSpec = client.post();`
+- prepare the request - define the url
+Here the url is specified as a string
+`RequestBodySpec bodySpec = uriSpec.uri("http://localhost:5000")`
+- prepare the request - define the body
+The request body uses BodyInserters to build the body, under the hood the Jackson de/serializer is used to handle the
+de/serialization between Java and Json object.
+```
+User user = new User();
+RequestHeadersSpec<?> headersSpec = bodySpec.bodyValue(user);
+```
+- prepare the request - define the headers
+```
+ResponseSpec responseSpec = headersSpec.header( HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+  .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+  .acceptCharset(StandardCharsets.UTF_8)
+  .ifNoneMatch("*")
+  .ifModifiedSince(ZonedDateTime.now())
+  .retrieve();;
+```
+3. handle the response
+The response can be atrieved in a fluent way with exception handling and object deserialization.
+```
+User newUser = new User();
+Mono<User> userMono = webClient
+            .post()
+            .uri("http://localhost:5000") // service url
+            .header("Content-Type", "application/json")
+            .header("Authorization", "Bear <tokan>") // more headers can be chained
+            .bodyValue(newUser) // java object can be serialized into http body
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieve()
+            .onStatus(HttpStatus.INTERNAL_SERVER_ERROR::equals, response -> response.bodyToMono(String.class).map(CustomServerErrorException::new))
+            .onStatus(HttpStatus.BAD_REQUEST::equals, response -> response.bodyToMono(String.class).map(CustomBadRequestException::new))
+            .bodyToMono(User.class);
+User user = userMono.block();
+```
+4. work with WebTestClient
+The WebTestClient is the main entry point for testing WebFlux server endpoints. It has a very similar API to the WebClient, 
+and it delegates most of the work to an internal WebClient instance focusing mainly on providing a test context. 
+The DefaultWebTestClient class is a single interface implementation.  
+The client for testing can be bound to a real server or work with specific controllers or functions.
+- bind to a server
+To complete end-to-end integration tests with actual requests to a running server, we can use the bindToServer method:
+```
+WebTestClient testClient = WebTestClient
+  .bindToServer()
+  .baseUrl("http://localhost:5000")
+  .build();
+```
+- bind to a router
+We can test a particular RouterFunction by passing it to the bindToRouterFunction method:
+```
+RouterFunction function = RouterFunctions.route(
+  RequestPredicates.GET("/resource"),
+  request -> ServerResponse.ok().build()
+);
+
+WebTestClient
+  .bindToRouterFunction(function)
+  .build().get().uri("/resource")
+  .exchange()
+  .expectStatus().isOk()
+  .expectBody().isEmpty();
+```
+- bind to a web handler
+The same behavior can be achieved with the bindToWebHandler method, which takes a WebHandler instance:
+```
+WebHandler handler = exchange -> Mono.empty();
+WebTestClient.bindToWebHandler(handler).build();
+```
+- bind to an application context
+A more interesting situation occurs when we're using the bindToApplicationContext method. 
+It takes an ApplicationContext and analyses the context for controller beans and @EnableWebFlux configurations.
+If we inject an instance of the ApplicationContext, a simple code snippet may look like this:
+```
+@Autowired
+private ApplicationContext context;
+
+WebTestClient testClient = WebTestClient.bindToApplicationContext(context)
+  .build();
+```
+- bind to a controller
+A shorter approach would be providing an array of controllers we want to test by the bindToController method. 
+Assuming we've got a Controller class and we injected it into a needed class, we can write:
+```
+@Autowired
+private Controller controller;
+
+WebTestClient testClient = WebTestClient.bindToController(controller).build();
+```
+- make a request
+After building a WebTestClient object, all following operations in the chain are going to be similar to the 
+WebClient until the exchange method (one way to get a response),
+which provides the WebTestClient.ResponseSpec interface to work with useful methods like the expectStatus,
+expectBody, and expectHeader:
+```
+WebTestClient
+  .bindToServer()
+    .baseUrl("http://localhost:8080")
+    .build()
+    .post()
+    .uri("/resource")
+  .exchange()
+    .expectStatus().isCreated()
+    .expectHeader().valueEquals("Content-Type", "application/json")
+    .expectBody().jsonPath("field").isEqualTo("value");
+```
 
