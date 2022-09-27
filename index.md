@@ -5,7 +5,7 @@
 ## [Database](Database) - [Mysql](Mysql), H2, [Oracle](Oracle), [Postgresql](Postgresql), SQL Server
 ## Front End - HTML, CSS, ,[JavaScript](JavaScript), Material-UI
 ## [Spring Framework](Spring Framework) - [[Spring Data]], [Spring Boot](SpringBoot)
-## [Nodejs](Nodejs) - Node, npm and [React](React)
+## [Nodejs](Nodejs) - Node, npm and [React](React), [[Next Js]]
 ## [Grails](Grails)
 ## [Gradle](Gradle)
 ## [Maven](Maven)
