@@ -3,7 +3,7 @@
 ## [Shell](Shell) - [Bash](Bash), [Zsh](Zsh), [PowerShell](PowerShell), Shell Script, SSH, [PKI](PKI)
 ## Network - firewall, nat, [Tomcat](Tomcat), [Apache](Apache)
 ## [Database](Database) - [Mysql](Mysql), H2, [Oracle](Oracle), [Postgresql](Postgresql), SQL Server
-## Front End - HTML, CSS, ,[JavaScript](JavaScript), Material-UI
+## Front End - HTML, [CSS](CSS), ,[JavaScript](JavaScript), [TailwindCSS](TailwindCSS), [TypeScript](TypeScript)
 ## [Spring Framework](Spring Framework) - [[Spring Data]], [Spring Boot](SpringBoot)
 ## [Nodejs](Nodejs) - Node, npm and [React](React), [[Next Js]]
 ## [Grails](Grails)
@@ -32,3 +32,5 @@
 ## Shiny Server for College of Engineering
 # [Vim](Vim)
 # [RegExp](RegExp)
+# Blockchain
+## [Hardhat](Hardhat)

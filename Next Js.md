@@ -13,3 +13,7 @@ This is different than the `router.replace('/distination')`, `push` is to push t
 `Back` will go back to the previous page; `replace` is to replace the current path with the distination, `Back` will not
 go back to the previous page.
 
+# Next JS Tutorial
+Next js has file based routing, and it has separate pages routing and api routing. We usually put the client functions
+into the `pages` and the server calls involving external apis and database into `pages/api`.
+
