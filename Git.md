@@ -50,7 +50,7 @@ Git proxy can be set/unset globally
 `git-filter-repo` is a command line tool to remove the sensitive or large files from commit history both locally and on
 remote.
 1. install `git-filter-repo` using homebrew `brew install git-filter-repo`
-2. clone the repo running `git clone --mirrow <repo_url>`
+2. clone the repo running `git clone --mirror <repo_url>`
 3. remove the files, `cd` to the cloned repo, run below command to remove the file, run multi times if there are multi
    files
    ```
