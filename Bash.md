@@ -1,3 +1,15 @@
 ## If git bash on Windows runs very slowly, try to reset PS1. In ~/.bashrc file add this line:
 PS1="\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]\[\033[0m\]\n$ "
 
+#Bach Command Learned Daily
+## look for the **content** in the **java** source files, recommend to use direct `grep` approach
+- direct `grep` with `-exec`
+`find . -type f -name '*.java' -exec grep -l 'content' {} +`  
+`{}` is replaced by the file path. `+` means `find` will pass multiple filenames at once to `grep` (similar to `xargs`)
+`-l` only lists matching filename
+this is similar to `find . -type f -name '*.java' | xargs grep 'content'`
+- one file at a time
+`find . -type f -name '*.java' -exec grep -l 'content' {} \;`
+The `\;` runs `grep` once per file (less efficient than `+`, but more straightforward)
+`-l` only lists matching filename
+ 
