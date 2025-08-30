@@ -11,5 +11,5 @@ this is similar to `find . -type f -name '*.java' | xargs grep 'content'`
 - one file at a time
 `find . -type f -name '*.java' -exec grep -l 'content' {} \;`
 The `\;` runs `grep` once per file (less efficient than `+`, but more straightforward)
-`-l` only lists matching filename
+`-l` only lists matching filename, without `-l` the content in the files will be listed as well
  
