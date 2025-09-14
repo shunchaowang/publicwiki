@@ -14,6 +14,7 @@
 ## [Algorithm](Algorithm)
 # [R](R) - Installation, Configuration, Shiny Server, RStudio
 # [Tools](Tools) - [Docker](Docker), unit test, integration test, load test
+# [Openshift](Openshift)
 # VCS - [Git](Git), [SVN](SVN)
 # [Airflow](Airflow)
 # [Projects](Projects)
