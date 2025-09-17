@@ -1,3 +1,4 @@
+# Test
 ## Mock Test
 ## WireMock Test
 When we need to do the integration test involving external libraries and apis, since we don't own them, it's not a good
@@ -199,4 +200,13 @@ WebTestClient
     .expectHeader().valueEquals("Content-Type", "application/json")
     .expectBody().jsonPath("field").isEqualTo("value");
 ```
+
+# Spring Boot App Configuration Precedences
+Spring boot supports the configurations in a few places, some configurations take precedences and some overrides others.
+Here is the list of all options in the precedence order, the ones coming first override the later ones.
+1. Command line arguments `java -jar app.jar --name="NewName"`.
+2. The `application.properties/yaml` file in `/config` subdir of the jar file directory.
+3. The `application.properties/yaml` file in the same directory of the jar file.
+4. The `application.properties/yaml` file in the classpath `/config` package.
+5. The `application.properties/yaml` file in the classpath root.
 
