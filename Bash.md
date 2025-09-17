@@ -13,4 +13,11 @@ this is similar to `find . -type f -name '*.java' | xargs grep 'content'`
 `find . -type f -name '*.java' -exec grep -l 'content' {} \;`
 The `\;` runs `grep` once per file (less efficient than `+`, but more straightforward)
 `-l` only lists matching filename, without `-l` the content in the files will be listed as well
- 
+
+## Append a local file to the file on the remote server
+1. We can use `scp` to copy the file to the remote server, then append the content to the file.
+2. The intuitive way is to `pipe` the `cat` output to the `ssh` command chain. The example is to copy my public key to
+   the remote server for passwordless remote login.
+```
+cat ~/.ssh/<publicKey>.pub | ssh <user>@<host> 'cat >> ~/.ssh/authorized_keys'
+```
