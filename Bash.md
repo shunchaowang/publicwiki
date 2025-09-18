@@ -21,3 +21,12 @@ The `\;` runs `grep` once per file (less efficient than `+`, but more straightfo
 ```
 cat ~/.ssh/<publicKey>.pub | ssh <user>@<host> 'cat >> ~/.ssh/authorized_keys'
 ```
+## Copy file into multi directories single command
+We can use `echo` or `ls` similar command to output the directory list and pipe to `cp` to copy file into multi
+directories by a single command. There are 3 dirs under the current directory, we can run the command below to copy a
+file into all of 3 the same time.
+`echo "dir1 dir2 dir3" | xargs -n 1 cp -v file.txt`
+- `echo` will print the dir names to the stdout, we then pipe the output to the `xargs`command
+- `xargs -n 1` tells `xargs` to process 1 output each time, it will execute 3 times
+- `cp` copies the `file.txt` to the 3 dirs
+
